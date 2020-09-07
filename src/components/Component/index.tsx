@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import { clone } from '../../utils/clone';
 import {
@@ -9,8 +9,10 @@ import {
   isUndefined,
 } from '../../utils/types';
 import { BuilderFieldOperator } from '../Builder';
+import { Button } from '../Button';
 import { BuilderContext } from '../Context';
 import { Boolean } from '../Widgets/Boolean';
+import { DateInterval } from '../Widgets/DateInterval';
 import { FieldSelect } from '../Widgets/FieldSelect';
 import { Input } from '../Widgets/Input';
 import { OperatorSelect } from '../Widgets/OperatorSelect';
@@ -20,6 +22,10 @@ import { SelectMulti } from '../Widgets/SelectMulti';
 const BooleanContainer = styled.div`
   align-self: center;
 `;
+
+const isDate = (date: any) => {
+  return !isNaN(new Date(date).getDate());
+};
 
 export interface ComponentProps {
   field: string;
@@ -43,6 +49,7 @@ export const Component: React.FC<ComponentProps> = ({
     strings,
     readOnly,
   } = useContext(BuilderContext);
+  const [dateInterval, setDateInterval] = useState(!isDate(selectedValue));
   const { Component: ComponentContainer, Remove } = components;
 
   const handleDelete = () => {
@@ -58,6 +65,10 @@ export const Component: React.FC<ComponentProps> = ({
 
     setData(clonedData);
     onChange(clonedData);
+  };
+
+  const switchCtrl = () => {
+    setDateInterval(!dateInterval);
   };
 
   if (fields && strings.component) {
@@ -178,6 +189,7 @@ export const Component: React.FC<ComponentProps> = ({
               )}
 
             {type === 'DATE' &&
+              isOptionList(fieldValue) &&
               isOptionList(operatorsOptionList) &&
               (isString(selectedValue) || isStringArray(selectedValue)) && (
                 <>
@@ -187,7 +199,17 @@ export const Component: React.FC<ComponentProps> = ({
                     selectedValue={operator}
                   />
                   {!isUndefined(operator) && (
-                    <Input type="date" value={selectedValue} id={id} />
+                    <>
+                      {dateInterval ? (
+                        <DateInterval value={selectedValue} id={id} />
+                      ) : (
+                        <Input type="date" value={selectedValue} id={id} />
+                      )}
+                      <Button
+                        onClick={switchCtrl}
+                        label={dateInterval ? 'Date' : 'Interval'}
+                      />
+                    </>
                   )}
                 </>
               )}
