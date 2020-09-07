@@ -1,6 +1,5 @@
 {
-  "name": "@vojtechportes/react-query-builder",
-  "version": "0.4.3",
+  "name": "@tamu-dor/react-query-builder",
   "license": "MIT",
   "keywords": [
     "react",
@@ -14,14 +13,14 @@
   ],
   "description": "Simple, highly configurable query builder for react",
   "author": {
-    "email": "vojtech.v.portes@gmail.com",
-    "name": "Vojtech Portes",
-    "url": "https://www.github.com/vojtechportes"
+    "email": "mattv@tamu.edu",
+    "name": "Matthew Voss",
+    "url": "https://www.github.com/mattvoss"
   },
-  "homepage": "https://github.com/vojtechportes/react-query-builder",
+  "homepage": "https://github.com/mattvoss/react-query-builder",
   "repository": {
     "type": "git",
-    "url": "https://github.com/vojtechportes/react-query-builder.git"
+    "url": "https://github.com/mattvoss/react-query-builder.git"
   },
   "main": "dist/index.js",
   "module": "dist/react-query-builder.esm.js",
