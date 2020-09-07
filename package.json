@@ -1,5 +1,6 @@
 {
   "name": "@tamu-dor/react-query-builder",
+  "version": "0.4.4",
   "license": "MIT",
   "keywords": [
     "react",
